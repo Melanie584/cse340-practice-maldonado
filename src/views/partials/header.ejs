@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
     <link rel="stylesheet" href="/css/main.css">
+    
+    <%- renderStyles() %>
 </head>
 <body>
     <header>
@@ -14,6 +16,19 @@
                 <li><a href="/about">About</a></li>
                 <li><a href="/catalog">Course Catalog</a></li>
                 <li><a href="/faculty">Faculty</a></li>
+
+                <% if (isLoggedIn) { %>
+                    <li><a href="/dashboard">Dashboard</a></li>
+                    <li><a href="/register/list">All Users</a></li>
+                    <li><a href="/logout">Logout</a></li>
+                <% } %>
+
+                <% if (!isLoggedIn) { %>
+                    <li><a href="/login">Login</a></li>
+                    <li><a href="/register">Register</a></li>
+                <% } %>
             </ul>
         </nav>
     </header>
+
+<%- renderScripts() %>

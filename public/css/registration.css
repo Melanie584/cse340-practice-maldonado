@@ -1,0 +1,46 @@
+.registration-form {
+    max-width: 600px;
+    margin: 2rem auto;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.75rem;
+    box-sizing: border-box;
+}
+
+.help-text {
+    margin-top: 0.4rem;
+    font-size: 0.9rem;
+}
+
+.registration-form button {
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+}
+
+.user-list {
+    display: grid;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.user-card {
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+}
+
+.user-card h2 {
+    margin-top: 0;
+}

@@ -1,10 +1,15 @@
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import session from 'express-session';
+import pgSession from 'connect-pg-simple';
 
 // Import MVC components
 import routes from './src/controllers/routes.js';
 import { addLocalVariables } from './src/middleware/global.js';
+import { setupDatabase, testConnection } from './src/models/setup.js';
+import db from './src/models/db.js';
+import { startSessionCleanup } from './src/utils/session-cleanup.js';
 
 /**
  * Server configuration
@@ -19,12 +24,39 @@ const PORT = process.env.PORT || 3000;
  */
 const app = express();
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 /**
  * Configure Express
  */
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'src/views'));
+
+/**
+ * Session Configuration
+ */
+const PostgreSQLStore = pgSession(session);
+
+app.use(
+    session({
+        store: new PostgreSQLStore({
+            pool: db,
+            tableName: 'session',
+            createTableIfMissing: true
+        }),
+        secret: process.env.SESSION_SECRET,
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+            maxAge: 24 * 60 * 60 * 1000,
+            httpOnly: true,
+            secure: NODE_ENV === 'production',
+            sameSite: 'lax'
+        }
+    })
+);
 
 /**
  * Global Middleware
@@ -77,6 +109,11 @@ app.use((err, req, res, next) => {
 /**
  * Start Server
  */
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
+    await setupDatabase();
+    await testConnection();
+
+    startSessionCleanup();
+
     console.log(`Server is running on http://127.0.0.1:${PORT}`);
 });
