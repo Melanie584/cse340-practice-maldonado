@@ -4,6 +4,12 @@
     <h1><%= faculty.name %></h1>
 
     <div class="faculty-detail">
+        <img
+            src="/images/faculty/<%= faculty.slug %>.jpg"
+            alt="Photo of <%= faculty.name %>"
+            class="faculty-image"
+        >
+
         <p><strong>Title:</strong> <%= faculty.title %></p>
         <p><strong>Department:</strong> <%= faculty.department %></p>
         <p><strong>Office:</strong> <%= faculty.office %></p>

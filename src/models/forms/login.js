@@ -8,12 +8,14 @@ import db from '../db.js';
  * @returns {Promise<Object|null>} User object with password hash or null if not found
  */
 const findUserByEmail = async (email) => {
-    const query = `
-        SELECT id, name, email, password, created_at
-        FROM users
-        WHERE LOWER(email) = LOWER($1)
-        LIMIT 1
-    `;
+
+const query = `
+    SELECT id, name, email, password, role_id, created_at
+    FROM users
+    WHERE LOWER(email) = LOWER($1)
+    LIMIT 1
+`;
+
 
     const result = await db.query(query, [email]);
 

@@ -1,0 +1,18 @@
+/* Faculty profile images */
+.faculty-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.faculty-card {
+    padding: 15px;
+}
+
+.faculty-detail .faculty-image {
+    width: 200px;
+    height: 200px;
+}

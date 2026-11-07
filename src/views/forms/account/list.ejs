@@ -1,0 +1,46 @@
+<%- include('../../partials/header') %>
+
+<main class="account-page">
+    <h1>Manage Accounts</h1>
+
+    <% if (users.length === 0) { %>
+        <p>No accounts found.</p>
+    <% } else { %>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% users.forEach(user => { %>
+                    <tr>
+                        <td><%= user.name %></td>
+                        <td><%= user.email %></td>
+                        <td><%= user.role_id === 2 ? 'Admin' : 'User' %></td>
+                        <td>
+                            <form
+                                action="/account/delete/<%= user.id %>"
+                                method="POST"
+                            >
+                                <button
+                                    type="submit"
+                                    onclick="return confirm('Delete this account?')"
+                                >
+                                    Delete
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    <% } %>
+
+    <p><a href="/dashboard">Back to Dashboard</a></p>
+</main>
+
+<%- include('../../partials/footer') %>

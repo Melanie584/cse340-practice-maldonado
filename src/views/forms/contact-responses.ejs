@@ -1,0 +1,20 @@
+<%- include('../partials/header') %>
+
+<main>
+    <h1>Contact Submissions</h1>
+
+    <% if (contacts.length === 0) { %>
+        <p>No contact submissions yet.</p>
+    <% } else { %>
+        <% contacts.forEach(contact => { %>
+            <div class="contact-response">
+                <h2><%= contact.subject %></h2>
+                <p><strong>Name:</strong> <%= contact.name %></p>
+                <p><strong>Email:</strong> <%= contact.email %></p>
+                <p><strong>Message:</strong> <%= contact.message %></p>
+            </div>
+        <% }); %>
+    <% } %>
+</main>
+
+<%- include('../partials/footer') %>

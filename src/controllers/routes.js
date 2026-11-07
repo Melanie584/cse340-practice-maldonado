@@ -1,4 +1,8 @@
+
+import { Router } from 'express';
 import { addDemoHeaders } from '../middleware/demo/headers.js';
+import { requireLogin } from '../middleware/auth.js';
+import contactRouter from './forms/contact.js';
 
 import {
     homePage,
@@ -19,9 +23,8 @@ import {
 
 import registrationRouter from './forms/registration.js';
 import loginRoutes from './forms/login.js';
+import accountRouter from './forms/account.js';
 import { processLogout, showDashboard } from './forms/login.js';
-import { requireLogin } from '../middleware/auth.js';
-import { Router } from 'express';
 
 const router = Router();
 
@@ -68,6 +71,12 @@ router.use('/register', registrationRouter);
 
 // Login routes
 router.use('/login', loginRoutes);
+
+// Account management routes
+router.use('/account', accountRouter);
+
+// Contact form routes
+router.use('/contact', contactRouter);
 
 // Authentication routes
 router.get('/logout', processLogout);

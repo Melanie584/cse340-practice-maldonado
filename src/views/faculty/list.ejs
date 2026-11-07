@@ -3,7 +3,7 @@
 <main>
     <h1><%= title %></h1>
 
-    <div>
+    <div class="faculty-sort">
         <p>Sort faculty by:</p>
         <a href="/faculty?sort=name">Name</a>
         <a href="/faculty?sort=department">Department</a>
@@ -13,6 +13,15 @@
     <div class="faculty-list">
         <% faculty.forEach(member => { %>
             <div class="faculty-card">
+                <a href="/faculty/<%= member.slug %>">
+                    <img
+                        src="/images/faculty/<%= member.slug %>.jpg"
+                        alt="Photo of <%= member.name %>"
+                        class="faculty-image"
+                        loading="lazy"
+                    >
+                </a>
+
                 <h2>
                     <a href="/faculty/<%= member.slug %>">
                         <%= member.name %>
